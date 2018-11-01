@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function check_disk_used {
+function disk_used_check {
     get_last_alert
     cd $TARGET_DIR
     #Get used space of partition where we currently.
@@ -10,7 +10,6 @@ function check_disk_used {
     if [ $USED -gt $DISK_OVER_QUOTA_LIMIT ] && [ $INTERVAL -gt $ALERT_TIME ]
     then
         echo $NOW > /tmp/.alert-time
-        slack_webhook
+        slack_webhook "Disk Usage Warning. Disk used over $USED%"
     fi
-    echo $USED
 }
