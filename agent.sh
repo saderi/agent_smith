@@ -1,7 +1,8 @@
 #!/bin/bash
 
 source config.cfg
-source slack_webhook.sh
+source notfiy.sh
+source checkers.sh
 
 function get_last_alert {
     NOW=$(date +"%s")
@@ -14,10 +15,8 @@ function get_last_alert {
     INTERVAL=$(($NOW - $LAST_ALERT))
 }
 
-# Run check disk function
-source checkers/disk_used_check.sh
-disk_used_check
-
 # Run uptime function
-source checkers/uptime_check.sh
 uptime_check
+
+# Run check disk function
+disk_used_check
