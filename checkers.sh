@@ -2,7 +2,6 @@
 
 function disk_used_check {
     get_last_alert
-    cd $TARGET_DIR
     #Get used space of partition where we currently.
     USED=`df $TARGET_FILESYSTEM | awk '{print $5}' | sed -ne 2p | cut -d"%" -f1`
 
