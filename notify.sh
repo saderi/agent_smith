@@ -25,5 +25,5 @@ function sms_kavenegar  {
 
 function send_sms  {
     MESSAGE=$1
-    sms_$ACRIVE_SMS_GATEWAY $MESSAGE
+    sms_$ACTIVE_SMS_GATEWAY $MESSAGE
 }
