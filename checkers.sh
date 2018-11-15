@@ -10,6 +10,7 @@ function disk_used_check {
     then
         echo $NOW > /tmp/.alert-time
         slack_webhook "Disk Usage Warning. Disk used over $USED%"
+        send_sms "Disk+Usage+Warning.+Disk+used+over+$USED%"
     fi
 }
 
@@ -23,9 +24,7 @@ function uptime_check {
     then
         echo $NOW > /tmp/.alert-time
         slack_webhook "Over Uptime ${UPTIME_ARRAY[0]}%"
-        send_sms_clickatell "High+1+minute+load+average+alert+${UPTIME_ARRAY[0]}%"
+        send_sms "High+1+minute+load+average+alert+${UPTIME_ARRAY[0]}%"
     fi
 
 }
-
-
