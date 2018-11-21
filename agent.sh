@@ -20,3 +20,6 @@ uptime_check
 
 # Run check disk function
 disk_used_check
+
+# Run connaction counter function
+connaction_count
