@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function slack_webhook  {
     SLACK_WEBHOOK_MESSAGE=$1
     curl -X POST \
@@ -19,9 +18,10 @@ function sms_kavenegar  {
          --url http://api.kavenegar.com/v1/$KAVENEGAR_API_KEY/sms/send.json \
          --header 'cache-control: no-cache' \
          --header 'content-type: application/x-www-form-urlencoded' \
-         --data 'receptor=$SMS_RECEPTOR&message=$MESSAGE'
+         --data "receptor=$SMS_RECEPTOR&message=$MESSAGE"
 
 }
+
 
 function send_sms  {
     MESSAGE=$1
