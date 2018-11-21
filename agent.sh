@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source config.cfg
-source notify.sh
-source checkers.sh
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+source $DIR/config.cfg
+source $DIR/notify.sh
+source $DIR/checkers.sh
 
 function get_last_alert {
     NOW=$(date +"%s")
