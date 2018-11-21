@@ -13,8 +13,8 @@ function disk_used_check {
         # Set and send message
         MESSAGE="Disk Usage Warning. Disk used over $USED%"
         SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
-        slack_webhook $MESSAGE
-        send_sms $SMS_MESSAGE
+        slack_webhook "$MESSAGE"
+        send_sms "$SMS_MESSAGE"
     fi
 }
 
@@ -31,8 +31,8 @@ function uptime_check {
         # Set and send message
         MESSAGE="High 1 minute load average alert ${UPTIME_ARRAY[0]}%"
         SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
-        slack_webhook $MESSAGE
-        send_sms $SMS_MESSAGE
+        slack_webhook "$MESSAGE"
+        send_sms "$SMS_MESSAGE"
     fi
 
 }
@@ -53,7 +53,7 @@ function connaction_count {
         # Set and send message
         MESSAGE="count is $CORRENT_COUNT. highest number of connections $HIGHEST_CONNECTIONS"
         SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
-        slack_webhook $MESSAGE
-        send_sms $SMS_MESSAGE
+        slack_webhook "$MESSAGE"
+        send_sms "$SMS_MESSAGE"
     fi
 }
