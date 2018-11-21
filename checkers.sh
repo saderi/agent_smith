@@ -9,8 +9,12 @@ function disk_used_check {
     if [ $USED -gt $DISK_OVER_QUOTA_LIMIT ] && [ $INTERVAL -gt $ALERT_TIME ]
     then
         echo $NOW > /tmp/.alert-time
-        slack_webhook "Disk Usage Warning. Disk used over $USED%"
-        send_sms "Disk+Usage+Warning.+Disk+used+over+$USED%"
+        
+        # Set and send message
+        MESSAGE="Disk Usage Warning. Disk used over $USED%"
+        SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
+        slack_webhook $MESSAGE
+        send_sms $SMS_MESSAGE
     fi
 }
 
@@ -23,8 +27,33 @@ function uptime_check {
     if [ ${UPTIME_ARRAY[0]%.*} -gt $OVER_UPTIME ] && [ $INTERVAL -gt $ALERT_TIME ]
     then
         echo $NOW > /tmp/.alert-time
-        slack_webhook "Over Uptime ${UPTIME_ARRAY[0]}%"
-        send_sms "High+1+minute+load+average+alert+${UPTIME_ARRAY[0]}%"
+
+        # Set and send message
+        MESSAGE="High 1 minute load average alert ${UPTIME_ARRAY[0]}%"
+        SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
+        slack_webhook $MESSAGE
+        send_sms $SMS_MESSAGE
     fi
 
+}
+
+
+function connaction_count {
+    get_last_alert
+    CORRENT_COUNT=$(netstat -anp | grep ':443\|:80' | wc -l)
+
+    if [ $CORRENT_COUNT -gt $CONNACTION_LIMIT ] && [ $INTERVAL -gt $ALERT_TIME ]
+    then
+        echo $NOW > /tmp/.alert-time
+        HIGHEST_CONNECTIONS=$(netstat -anp | grep ':443\|:80' | awk '{print $5}' | \
+        cut -d: -f1 | \
+        sort | uniq -c | sort -n | \
+        grep -v 0.0.0.0 | tail -6 | head -5)
+
+        # Set and send message
+        MESSAGE="count is $CORRENT_COUNT. highest number of connections $HIGHEST_CONNECTIONS"
+        SMS_MESSAGE=$(echo $MESSAGE | sed -e 's/\ /+/g')
+        slack_webhook $MESSAGE
+        send_sms $SMS_MESSAGE
+    fi
 }
