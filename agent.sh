@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source config.cfg
-source notfiy.sh
+source notify.sh
 source checkers.sh
 
 function get_last_alert {
