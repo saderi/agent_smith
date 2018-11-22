@@ -17,11 +17,16 @@ function get_last_alert {
     INTERVAL=$(($NOW - $LAST_ALERT))
 }
 
+# Choose notify gateway with string parametr 
+# 'sms'   = message send only with sms
+# 'slack' = message send only with slack
+# 'all'   = message send only with slack and sms
+
 # Run uptime function
-uptime_check
+uptime_check "all"
 
 # Run check disk function
-disk_used_check
+disk_used_check "all"
 
 # Run connaction counter function
-connaction_count
+connaction_count "slack"
