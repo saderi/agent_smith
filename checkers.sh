@@ -11,7 +11,7 @@ function disk_used_check {
         echo $NOW > /tmp/.alert-time
         
         # Set and send message
-        MESSAGE="Server $SERVER_ID: Disk Usage Warning. Disk used over $USED%"
+        MESSAGE="Disk Usage Warning. Disk used over $USED%"
         send_notify "Server $SERVER_ID: $MESSAGE" "$1"
     fi
 }
@@ -27,8 +27,8 @@ function uptime_check {
         echo $NOW > /tmp/.alert-time
 
         # Set and send message
-        MESSAGE="Server $SERVER_ID: High 1 minute load average alert ${UPTIME_ARRAY[0]}%"
-        send_notify "$MESSAGE" "$1"
+        MESSAGE="High 1 minute load average alert ${UPTIME_ARRAY[0]}%"
+        send_notify "Server $SERVER_ID: $MESSAGE" "$1"
     fi
 
 }
@@ -47,7 +47,7 @@ function connaction_count {
         grep -v 0.0.0.0 | tail -6 | head -5)
 
         # Set and send message
-        MESSAGE="Server $SERVER_ID: Connections count is $CORRENT_COUNT.\n Highest number of connections:\n  $HIGHEST_CONNECTIONS"
-        send_notify "$MESSAGE" "$1"
+        MESSAGE="Connections count is $CORRENT_COUNT.\n Highest number of connections:\n  $HIGHEST_CONNECTIONS"
+        send_notify "Server $SERVER_ID: $MESSAGE" "$1"
     fi
 }
