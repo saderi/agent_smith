@@ -23,10 +23,10 @@ function get_last_alert {
 # 'all'   = message send only with slack and sms
 
 # Run uptime function
-uptime_check "all"
+uptime_check "slack"
 
 # Run check disk function
-disk_used_check "all"
+disk_used_check "slack"
 
 # Run connaction counter function
 connaction_count "slack"
